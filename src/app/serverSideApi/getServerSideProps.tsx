@@ -1,8 +1,10 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
 type Repo = {
-  name: string;
-  stargazers_count: number;
+  name: string
+  stargazers_count: number
+  data: any 
+
 };
 
 export const getServerSideProps = (
@@ -12,6 +14,6 @@ export const getServerSideProps = (
         const res = await fetch(`https://api.artic.edu/api/v1/artworks?fields=id,title,image_id`);
         const repo: Repo = await res.json();
       // Pass data to the page via props'
-      return { props: { repo } };
+      return { props: {repo, } };
 
-}) satisfies GetServerSideProps<{ repo: Repo }>;
+}) satisfies GetServerSideProps<{ repo: Repo  }>;

@@ -1,39 +1,77 @@
 "use client";
+import { Fira_Sans } from "next/font/google";
+import ReactLoading from "react-loading";
 import Image from "next/image";
-import { use, useState } from "react";
+import { useState, useEffect } from "react";
+import { getServerSideProps } from "../serverSideApi/getServerSideProps";
+import type { InferGetServerSidePropsType } from "next";
+import "./gallery.scss";
 
- 
-type JSONresponse = any | JSON | Response;
+type Props = { repo: any };
 
-export default async function Gallery() {
+const fira_sans = Fira_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "200",
+});
 
-  const [imagesInfoData, setimagesInfoData] = useState ();
+export default function Gallery({
+  repo,
+}: InferGetServerSidePropsType<typeof getServerSideProps> | Props) {
+  const [imagesArray, setImagesArray] = useState<never[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
 
-  // general info from the gallery api, with 12 pictures
-  let getGeneralInfoFromGallery: Response = await fetch(`https://api.artic.edu/api/v1/artworks`,{ cache: "force-cache" });
-  let generalDataFromGalery: JSONresponse = await getGeneralInfoFromGallery.json();  
-  let dataArray = generalDataFromGalery.data;
+  useEffect(() => {
+    setImagesArray(repo.props.repo.data);
+    imagesArray.length === 12 ? setLoading(false) : setLoading(true);
+  });
 
-    //creating images calls 
+  const arrayDataImages: (JSX.Element | undefined)[] = imagesArray.map(
+    (object: any) => {
+      if (object.image_id != null) {
+        return (
+          <div className="images__container">
+            <Image
+              key={object.id}
+              src={`https://www.artic.edu/iiif/2/${object.image_id}/full/843,/0/default.jpg`}
+              alt="Picture of the author"
+              width={400}
+              height={400}
+              //style={{display: 'inherit' }}
+            />
+            <h5 className={`images__container--title ${fira_sans.className}`}>
+              {" "}
+              {object.title}{" "}
+            </h5>
+          </div>
+        );
+      }
+    }
+  );
 
-  dataArray.forEach ( async (element: any)  => {
-  
-    let getImagesInfo : Response = 
-    await fetch(
-      `https://api.artic.edu/api/v1/artworks/${element.id}?fields=id,title,image_id`,
-        { cache: "force-cache" }
-      ); 
-  
-  //esta linea va en el hook state!
-  //let imagesInfo = await getImagesInfo.json();  
-  })
-  
-  return(  
-    <section>
-   
-
-
-
+  return isLoading ? (
+    <section className="loading">
+      <ReactLoading
+        type="bubbles"
+        color="#000000"
+        height={"50%"}
+        width={"50%"}
+      />
     </section>
-  )
+  ) : (
+    <section className="container">
+    
+      <div className="works__container">
+        
+        <div className="works__container">.</div>
+        <h6 className={`h6 ${fira_sans.className}`}>WORKS</h6>
+        
+      </div>
+
+
+
+      <section className="images">{arrayDataImages}</section>
+    
+    </section>
+  );
 }

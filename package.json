@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.0.4",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-loading": "^2.0.3",
     "yarn": "^1.22.21"
   },
   "devDependencies": {
@@ -20,6 +22,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "sass": "^1.69.5",
     "typescript": "^5"
   }
 }
