@@ -11,8 +11,8 @@ const LoadingScreen: NextPage<Props> = () => {
         <ReactLoading
           type="bubbles"
           color="#000000"
-          height={"50%"}
-          width={"50%"}
+          height={"30%"}
+          width={"30%"}
         />
       </section>
     </>
