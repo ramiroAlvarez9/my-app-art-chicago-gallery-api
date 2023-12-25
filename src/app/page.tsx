@@ -1,9 +1,6 @@
-
-import Menu    from './components/nav'
-import Gallery from './components/gallery'
+import Menu    from './components/Nav'
+import Gallery from './components/Gallery'
 import { getServerSideProps } from './serverSideApi/getServerSideProps';
-
-
 
 export default async function Home( ) {
   
@@ -13,9 +10,7 @@ export default async function Home( ) {
       
       <Menu />  
       <Gallery 
-
         repo = { await getServerSideProps() }
-
       />
 
     </main>
