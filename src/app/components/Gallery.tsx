@@ -7,22 +7,28 @@ import { getServerSideProps } from "../serverSideApi/getServerSideProps";
 import type { InferGetServerSidePropsType } from "next";
 import "./gallery.scss";
 
+
 type Props = {  repo: any };
+//font
 
-export default function Gallery  ({ repo }: InferGetServerSidePropsType<typeof getServerSideProps> | Props) 
 
-{
+export default function Gallery  ({ repo }: InferGetServerSidePropsType<typeof getServerSideProps> | Props) {
+ 
   const [imagesArray, setImagesArray] = 
     useState<never[]>([]);
   const [isLoading, setLoading] = 
     useState <boolean>(true);
-
+  
   useEffect( ()  => 
   {
     setImagesArray(repo.props.repo.data); //Fetching data from the API and adding it to the array (imagesArray).    
+    
     imagesArray.length === 12 ? 
         setLoading(false) : setLoading(true);
-  },[]);
+        
+
+  },[repo.props.repo.data, imagesArray.length]);
+  
 
   return isLoading ? 
           (
@@ -34,9 +40,10 @@ export default function Gallery  ({ repo }: InferGetServerSidePropsType<typeof g
     
               <WorksBar />
 
-              <ArrayOfPictures
-                imagesArray={imagesArray}
-              />
+            <ArrayOfPictures 
+              imagesArray={imagesArray}
+            />
+
     
           </section>
           );
