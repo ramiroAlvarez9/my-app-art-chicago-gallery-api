@@ -23,7 +23,6 @@ const ArrayOfPictures = ({ imagesArray }: Props) => {
           object.image_id != null &&
           !object.image_id.includes("883af6d-fd95-c855-ee7e-2093348774")
         ) {
-          console.log(index)
           return (
             <article className="images__container" key={index}>
               <Image
