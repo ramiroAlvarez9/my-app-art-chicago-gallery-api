@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { Fira_Sans } from "next/font/google";
-import { useEffect } from "react";
 import "./gallery.scss";
 
 interface Props {
@@ -31,7 +30,6 @@ const ArrayOfPictures = ({ imagesArray }: Props) => {
                 alt="Picture of the author"
                 width={400}
                 height={400}
-                sizes="(min-width: 768px) 25vw, 25vh"
               />
               <h5
                 className={`images__container--title ${fira_sans.className}`}

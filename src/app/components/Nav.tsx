@@ -1,6 +1,5 @@
 import './nav.scss'
 import Image from 'next/image'
-import Logo  from '../../../public/assets/art institute.png'
 import Hamburguer from '../../../public/assets/icons8-menú.svg';
 
 export default function Nav() {
@@ -10,7 +9,7 @@ export default function Nav() {
 
     <div className='logo__container'>
         <Image  
-                src= {Logo}
+                src= {`https://yt3.googleusercontent.com/ytc/AIf8zZR3QiXAQ3mMmGmNAEFHZX9Z5DvSrmE7C6HkdXRS5A=s900-c-k-c0x00ffffff-no-rj`}
                 alt="Picture of the author"
                 width={50}
                 height={50}        
